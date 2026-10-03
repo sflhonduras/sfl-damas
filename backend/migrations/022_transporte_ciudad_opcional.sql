@@ -1,0 +1,11 @@
+-- Bug real encontrado en producción (Render, 3 sept 2026): la tabla "transportes" es de
+-- las que se crearon antes de que existiera este sistema de migraciones — "ciudad" quedó
+-- como NOT NULL desde el origen, sin que la migración 019 (que agregó departamento/
+-- municipio) tocara esa restricción. Desde entonces, CUALQUIER transporte nuevo revienta
+-- con "null value in column ciudad violates not-null constraint" — no es un problema de
+-- permisos ni de usuario, le pasa a cualquiera que intente crear uno.
+--
+-- "ciudad" ya no se usa para transportes nuevos (el formulario solo pide
+-- departamento/municipio) — se deja la columna intacta para no perder el dato de los
+-- registros viejos, solo se le quita la obligación de traer un valor.
+ALTER TABLE transportes ALTER COLUMN ciudad DROP NOT NULL;

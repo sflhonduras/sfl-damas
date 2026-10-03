@@ -1,0 +1,132 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Public+Sans:wght@400;500;600;700;800&display=swap');
+
+@theme {
+  --color-ink: #1B140E;
+  --color-night: #241A12;
+  --color-night-2: #2E2115;
+  --color-ember: #B23A2E;
+  --color-ember-light: #D65C43;
+  --color-gold: #C9932F;
+  --color-gold-light: #E7B85C;
+  --color-gold-pale: #F4E3BC;
+  --color-palm: #2F5D3A;
+  --color-palm-light: #4A8659;
+  --color-parchment: #FBF6EC;
+  --color-parchment-2: #F3EAD3;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Public Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-parchment);
+  color: var(--color-ink);
+}
+
+h1, h2, h3, .font-display { font-family: var(--font-display); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+.flame-flicker {
+  animation: flicker 3.2s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+@keyframes flicker {
+  0%, 100% { transform: scaleY(1) rotate(0deg); }
+  25% { transform: scaleY(1.04) rotate(-1deg); }
+  50% { transform: scaleY(0.98) rotate(0.5deg); }
+  75% { transform: scaleY(1.03) rotate(1deg); }
+}
+
+.brillo-festivo {
+  animation: brillo 2.2s ease-in-out infinite;
+}
+@keyframes brillo {
+  0%, 100% { box-shadow: 0 0 0 rgba(201, 147, 47, 0); }
+  50% { box-shadow: 0 0 16px rgba(201, 147, 47, 0.35); }
+}
+
+.confeti-pieza {
+  position: absolute;
+  top: -5vh;
+  animation-name: confeti-caer;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes confeti-caer {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(540deg); opacity: 0.9; }
+}
+
+/* Confeti ambiental: versión sutil del confeti de la celebración de pantalla completa.
+   Vive en las esquinas, cae despacio y con opacidad baja — decorativo, no protagonista.
+   Se usa durante todo el mes del cumpleaños, en cualquier pestaña del Portal. */
+.confeti-ambiente-pieza {
+  position: fixed;
+  top: -6vh;
+  animation-name: confeti-ambiente-caer;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+}
+@keyframes confeti-ambiente-caer {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  8% { opacity: 0.5; }
+  92% { opacity: 0.5; }
+  100% { transform: translateY(112vh) rotate(200deg); opacity: 0; }
+}
+
+/* Cajas de regalo cayendo: más grandes y lentas que el confeti — piezas contadas, no un
+   aluvión, para que se noten sin saturar. */
+.regalo-ambiente-pieza {
+  position: fixed;
+  top: -8vh;
+  animation-name: regalo-ambiente-caer;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+}
+@keyframes regalo-ambiente-caer {
+  0% { transform: translateY(0) rotate(-8deg); opacity: 0; }
+  8% { opacity: 0.6; }
+  92% { opacity: 0.6; }
+  100% { transform: translateY(115vh) rotate(8deg); opacity: 0; }
+}
+
+/* Destellos dorados: el más discreto de los cuatro — parpadeo suave, sin caída ni desplazamiento. */
+.destello-ambiente-pieza {
+  position: fixed;
+  animation-name: destello-parpadeo;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes destello-parpadeo {
+  0%, 100% { opacity: 0; transform: scale(0.7); }
+  50% { opacity: 0.7; transform: scale(1); }
+}
+
+/* Globos subiendo: flotan desde abajo con un balanceo lateral suave, como si los moviera el aire. */
+.globo-ambiente-pieza {
+  position: fixed;
+  bottom: -12vh;
+  animation-name: globo-ambiente-subir;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes globo-ambiente-subir {
+  0% { transform: translate(0, 0); opacity: 0; }
+  8% { opacity: 0.55; }
+  25% { transform: translate(6px, -28vh); }
+  50% { transform: translate(-6px, -56vh); }
+  75% { transform: translate(6px, -84vh); }
+  92% { opacity: 0.55; }
+  100% { transform: translate(0, -115vh); opacity: 0; }
+}
+
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
