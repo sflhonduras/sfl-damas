@@ -28,11 +28,24 @@ Primera fila = encabezados exactos de columna (respetando mayúsculas, tildes y 
 | Estado Civil                    | No           |                                                             |
 | Hijos (Cantidad)                | No           | Número                                                     |
 | Observacion                     | No           |                                                             |
-| SFL 1 / SFL 2 / SFL 3 / SFL 4   | No           | Escribe `Registrado` (o `Si`/`Sí`) si ya asistió a ese nivel |
+| SFL 1 / SFL 2 / SFL 3 / SFL 4   | No           | Escribe `Registrado` (o `Si`/`Sí`) si ya asistió a ese nivel. **Vacío = no asistió, no "no se sabe"** |
+| SFL 1 Fecha / SFL 2 Fecha / ...  | No (recomendada) | Fecha en que completó ESE nivel. Acepta fecha de Excel o texto `AAAA-MM-DD` / `DD/MM/AAAA` |
 | SFL 1 Ciclo / SFL 2 Ciclo / ...  | No           | Número de ciclo/edición de ese nivel (si se dejó vacío, se asume ciclo 1) |
 
 Cualquier fila sin DNI o sin nombre se omite. Si el mismo DNI aparece más de una vez en el
 archivo, solo se toma la primera fila.
+
+### Sobre "SFL N Fecha" — por qué existe y qué NO significa
+
+El sistema guarda esta fecha internamente en el mismo campo que el código llama
+`fecha_graduacion` (nombre heredado de SFL-Hombres), y lo usa en **cada nivel** para calcular
+deserción entre niveles, Reportería y otras estadísticas — no solo en el nivel 4. Por eso se
+recomienda llenarlo en cada nivel que la participante ya completó.
+
+**Pero esto NO significa que haya una graduación en los niveles 1, 2 o 3.** La única
+graduación real en SFL es al completar los 4 niveles de forma secuencial. "SFL N Fecha" solo
+quiere decir "fecha en que completó ese nivel específico" — es terminología interna del
+código, no un hecho de negocio.
 
 ## Cómo correrlo
 
